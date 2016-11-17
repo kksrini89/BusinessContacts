@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseService } from './service/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,11 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 export class AppComponent {
   title = 'app works!';
   items: FirebaseListObservable<any[]>;
-  constructor(af: AngularFire) {
-    this.items = af.database.list('items');
-    console.log(this.items);
+  businesses: FirebaseListObservable<any[]>;
+  categories: FirebaseListObservable<any[]>;
+  constructor(private appService: FirebaseService) {
+    this.items = this.appService.getItems();//.subscribe(data => this.items = data);
+    this.businesses = this.appService.getBusiness();
+    this.categories = this.appService.getCategories();
   }
 }

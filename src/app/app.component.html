@@ -1,3 +1,18 @@
+<h2>items</h2>
 <ul *ngFor="let item of items | async">
+  <li>{{item.name}}</li>
+</ul>
+
+<hr>
+
+<h2>Business</h2>
+<ul *ngFor="let item of businesses | async">
+  <li>{{item.company}}</li>
+</ul>
+
+<hr>
+
+<h2>Category</h2>
+<ul *ngFor="let item of categories | async">
   <li>{{item.name}}</li>
 </ul>
