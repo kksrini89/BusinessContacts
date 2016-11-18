@@ -1,4 +1,76 @@
-<h2>items</h2>
+<div class="top-bar">
+  <div class="row">
+    <div class="top-bar-left">
+      <ul class="menu">
+        <li class="menu-text">Business Contacts</li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+
+    </div>
+  </div>
+</div>
+
+<br>
+
+<div *ngIf="appState=='extend'">
+  <div class="row">
+    <button class="button alert" (click)="changeState('default')">Go Back</button>
+  </div>
+  <div *ngFor="let item of businesses">
+    <div *ngIf="item.$key == activeKey">
+      <div class="row">
+        <div class="large-5 columns large-offset-1">
+          <h3>{{item.company}}</h3>
+          <p>Category : {{item.category}}</p>
+          <p>Years in business : {{item.years_in_business}}</p>
+          <p>{{item.description}}</p>
+        </div>
+        <div class="large-5 columns large-offset-1">
+          <h4>Contact Info</h4>
+          <ul>
+            <li>Phone : {{item.phone}}</li>
+            <li>Email : {{item.email}}</li>
+            <li>Street : {{item.street_address}}</li>
+            <li>City : {{item.city}}</li>
+            <li>State : {{item.state}}</li>
+            <li>ZipCode : {{item.zipcode}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div *ngIf="businesses">
+      <table>
+        <thead>
+          <th>Company</th>
+          <th>Category</th>
+          <th>Phone</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of businesses">
+            <td>{{item.company}}</td>
+            <td>{{item.category}}</td>
+            <td>{{item.phone}}</td>
+            <td>
+              <button class="button" (click)="changeState('extend',item.$key)">More</button>
+              <button class="button secondary">Edit</button>
+              <button class="button alert">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!--<h2>items</h2>
 <ul *ngFor="let item of items | async">
   <li>{{item.name}}</li>
 </ul>
@@ -15,4 +87,4 @@
 <h2>Category</h2>
 <ul *ngFor="let item of categories | async">
   <li>{{item.name}}</li>
-</ul>
+</ul>-->
