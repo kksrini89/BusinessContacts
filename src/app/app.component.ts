@@ -1,3 +1,4 @@
+// import { Category } from './Category';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { FirebaseService } from './service/firebase.service';
@@ -24,6 +25,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.appService.getBusiness().subscribe(businesses => this.businesses = businesses);
     this.appService.getCategories().subscribe(categories => this.categories = categories);
+  }
+
+  filterCategories(category: string) {
+    this.appService.getBusiness(category).subscribe(data => this.businesses = data);
   }
 
   changeState(state, key) {
