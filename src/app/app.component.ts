@@ -1,3 +1,4 @@
+// import { Business } from './Business';
 // import { Category } from './Category';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
@@ -16,10 +17,35 @@ export class AppComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
   appState: string;
   activeKey: number;
+  newBusiness: any;
   businesses: Business[];
   categories: Category[];
+
+  // Edit form- showing fields(two way databiding) 
+  activeCompany: string;
+  activeCategory: string;
+  activeYearsInBusiness: string;
+  activeCity: string;
+  activeState: string;
+  activeZipcode: string;
+  activePhone: string;
+  activeEmail: string;
+  activeStreet: string;
+  activeDescription: string;
+
   constructor(private appService: FirebaseService) {
     this.items = this.appService.getItems();//.subscribe(data => this.items = data);   
+    this.newBusiness = {
+      city: "Chennai",
+      company: "",
+      description: "",
+      email: "",
+      phone: "",
+      state: "",
+      street: "",
+      "years in business": 0,
+      zipcode: ""
+    }
   }
 
   ngOnInit() {
@@ -31,10 +57,51 @@ export class AppComponent implements OnInit {
     this.appService.getBusiness(category).subscribe(data => this.businesses = data);
   }
 
-  changeState(state, key) {
+  changeState(state, key = null) {
     if (key) {
       this.activeKey = key;
     }
     this.appState = state;
+  }
+
+  addBusiness(company: string, category: string, yearInBusiness: string, description: string, phone: string, email: string, state: string, zipcode: string, street: string,
+    city: string) {
+    let created_at = new Date().toString();
+
+    var newBusiness = {
+      company: company,
+      category: category,
+      years_in_business: yearInBusiness,
+      description: description,
+      email: email,
+      phone: phone,
+      zipcode: zipcode,
+      state: state,
+      city: city,
+      street_address: street,
+      created_at: created_at
+    }
+    //console.log(newBusiness);
+
+    this.appService.addBusiness(newBusiness);
+    this.changeState('default');
+  }
+
+  showEdit(business) {
+    this.changeState('edit', business.$key);
+    this.activeCompany = business.company;
+    this.activeCategory = business.category;
+    this.activeYearsInBusiness = business.years_in_business;
+    this.activeCity = business.city;
+    this.activeState = business.state;
+    this.activeZipcode = business.zipcode;
+    this.activePhone = business.phone;
+    this.activeEmail = business.email;
+    this.activeStreet = business.street_address;
+    this.activeDescription = business.description;
+  }
+
+  updateBusiness() {
+
   }
 }

@@ -28,4 +28,8 @@ export class FirebaseService {
     getCategories() {
         return this.af.database.list('categories') as FirebaseListObservable<Category[]>;
     }
+
+    addBusiness(newBusiness: any) {
+        this.af.database.list('business').push(newBusiness);
+    }
 }

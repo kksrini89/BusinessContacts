@@ -15,7 +15,7 @@
 
 <div class="row">
   <div class="large-6 columns">
-    <button class="button ">Add Business</button>
+    <button class="button" (click)="changeState('add')">Add Business</button>
   </div>
   <div class="large-6 columns">
     <div> Filter By Category :
@@ -24,6 +24,167 @@
         <option *ngFor="let category of categories" value="{{category.name}}">{{category.name}}</option>
       </select>
     </div>
+  </div>
+</div>
+
+<!--ADD FORM-->
+<div *ngIf="appState=='add'">
+  <div class="large-12 columns">
+    <h3>Add Business</h3>
+    <form (submit)="addBusiness(company.value,category.value,yearInBusiness.value,description.value,phone.value,email.value,
+                      state.value,zipcode.value,street.value,city.value)">      
+      <div class="row">
+        <div class="large-6 columns">
+          <label>
+          <input type="text" placeholder="Company" #company>
+        </label>
+        </div>
+        <div class="large-6 columns">
+          <label>
+          Category
+          <select #category>
+            <option value="0">Select</option>
+            <option *ngFor="let item of categories" value="{{item.name}}">{{item.name}}</option>
+          </select>
+        </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns">
+          <label> Year In Business
+          <input type="text" placeholder="Years in business" name="years in business" #yearInBusiness>
+        </label>
+        </div>
+        <div class="large-6 columns">
+          <label>
+          Description
+          <textarea type="text" #description placeholder="Description"></textarea>
+        </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="medium-6 columns">
+          <label> Phone
+          <input type="text" placeholder="Phone" name="phone" #phone>
+        </label>
+        </div>
+        <div class="medium-6 columns">
+          <label> Email
+          <input type="text" placeholder="Email" name="email" #email>
+        </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-6 columns">
+          <label>Street
+            <input type="text" name="street" #street>
+          </label>
+        </div>
+        <div class="medium-6 columns">
+          <label>City
+              <input type="text" name="city" #city>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-6 columns">
+          <label>State
+            <input type="text" name="state" #state>
+          </label>
+        </div>
+        <div class="medium-6 columns">
+          <label>Zipcode
+              <input type="text" name="zipcode" #zipcode>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+          <input type="submit" class="button" value="Submit">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--EDIT FORM-->
+<div *ngIf="appState=='add'">
+  <div class="large-12 columns">
+    <h3>Add Business</h3>
+    <form (submit)="updateBusiness()">      
+      <div class="row">
+        <div class="large-6 columns">
+          <label>
+          <input type="text" placeholder="Company" [(ngModel)]="activeCompany" name="activeCompany">
+        </label>
+        </div>
+        <div class="large-6 columns">
+          <label>
+          Category
+          <select [(ngModel)]="activeCategory" name="activeCategory">
+            <option value="0">Select</option>
+            <option *ngFor="let item of categories" value="{{item.name}}">{{item.name}}</option>
+          </select>
+        </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-6 columns">
+          <label> Year In Business
+          <input type="text" placeholder="Years in business" [(ngModel)]="activeYearsInBusiness" name="activeYearsInBusiness">
+        </label>
+        </div>
+        <div class="large-6 columns">
+          <label>
+          Description
+          <textarea type="text" [(ngModel)]="activeDescription" name="activeDescription" placeholder="Description"></textarea>
+        </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="medium-6 columns">
+          <label> Phone
+          <input type="text" placeholder="Phone" name="phone"[(ngModel)]="activePhone" name="activePhone" >
+        </label>
+        </div>
+        <div class="medium-6 columns">
+          <label> Email
+          <input type="text" placeholder="Email" name="email" [(ngModel)]="activeEmail" name="activeEmail" >
+        </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-6 columns">
+          <label>Street
+            <input type="text" name="street" [(ngModel)]="activeStreet" name="activeStreet">
+          </label>
+        </div>
+        <div class="medium-6 columns">
+          <label>City
+              <input type="text" name="city" [(ngModel)]="activeCity" name="activeCity">
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-6 columns">
+          <label>State
+            <input type="text" name="state" [(ngModel)]="activeState" name="activeState">
+          </label>
+        </div>
+        <div class="medium-6 columns">
+          <label>Zipcode
+              <input type="text" name="zipcode" [(ngModel)]="activeZipcode" name="activeZipcode">
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+          <input type="submit" class="button" value="Submit">
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -74,7 +235,7 @@
             <td>{{item.phone}}</td>
             <td>
               <button class="button" (click)="changeState('extend',item.$key)">More</button>
-              <button class="button secondary">Edit</button>
+              <button class="button secondary" (click)="showEdit(item)">Edit</button>
               <button class="button alert">Delete</button>
             </td>
           </tr>
