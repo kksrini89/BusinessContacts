@@ -1,5 +1,3 @@
-// import { Business } from './Business';
-// import { Category } from './Category';
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
 import { FirebaseService } from './service/firebase.service';
@@ -68,7 +66,7 @@ export class AppComponent implements OnInit {
     city: string) {
     let created_at = new Date().toString();
 
-    var newBusiness: Business = {
+    var newBusiness = {
       company: company,
       category: category,
       years_in_business: yearInBusiness,
@@ -115,5 +113,6 @@ export class AppComponent implements OnInit {
       email: this.activeEmail
     }
     this.appService.updateBusiness(updatedBusiness, this.activeKey);
+    this.changeState('default');
   }
 }
