@@ -115,4 +115,9 @@ export class AppComponent implements OnInit {
     this.appService.updateBusiness(updatedBusiness, this.activeKey);
     this.changeState('default');
   }
+
+  deleteBusiness(key: any) {
+    this.appService.deleteBusiness(key);
+    this.changeState('default');
+  }
 }

@@ -32,7 +32,7 @@
   <div class="large-12 columns">
     <h3>Add Business</h3>
     <form (submit)="addBusiness(company.value,category.value,yearInBusiness.value,description.value,phone.value,email.value,
-                      state.value,zipcode.value,street.value,city.value)">      
+                      state.value,zipcode.value,street.value,city.value)">
       <div class="row">
         <div class="large-6 columns">
           <label>
@@ -112,7 +112,7 @@
 <div *ngIf="appState=='edit'">
   <div class="large-12 columns">
     <h3>Edit Business</h3>
-    <form (submit)="updateBusiness()">      
+    <form (submit)="updateBusiness()">
       <div class="row">
         <div class="large-6 columns">
           <label>
@@ -236,7 +236,7 @@
             <td>
               <button class="button" (click)="changeState('extend',item.$key)">More</button>
               <button class="button secondary" (click)="showEdit(item)">Edit</button>
-              <button class="button alert">Delete</button>
+              <button class="button alert" (click)="deleteBusiness(item.$key)">Delete</button>
             </td>
           </tr>
         </tbody>
