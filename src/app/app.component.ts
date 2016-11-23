@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     city: string) {
     let created_at = new Date().toString();
 
-    var newBusiness = {
+    var newBusiness: Business = {
       company: company,
       category: category,
       years_in_business: yearInBusiness,
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
       zipcode: zipcode,
       state: state,
       city: city,
-      street_address: street,
+      street: street,
       created_at: created_at
     }
     //console.log(newBusiness);
@@ -97,11 +97,23 @@ export class AppComponent implements OnInit {
     this.activeZipcode = business.zipcode;
     this.activePhone = business.phone;
     this.activeEmail = business.email;
-    this.activeStreet = business.street_address;
+    this.activeStreet = business.street || business.street_address;
     this.activeDescription = business.description;
   }
 
   updateBusiness() {
-
+    var updatedBusiness = {
+      company: this.activeCompany,
+      description: this.activeDescription,
+      category: this.activeCategory,
+      years_in_business: this.activeYearsInBusiness,
+      street_address: this.activeStreet,
+      city: this.activeCity,
+      state: this.activeState,
+      zipcode: this.activeZipcode,
+      phone: this.activePhone,
+      email: this.activeEmail
+    }
+    this.appService.updateBusiness(updatedBusiness, this.activeKey);
   }
 }

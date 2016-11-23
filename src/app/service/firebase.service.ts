@@ -32,4 +32,8 @@ export class FirebaseService {
     addBusiness(newBusiness: any) {
         this.af.database.list('business').push(newBusiness);
     }
+
+    updateBusiness(updatedBusiness: any, key: any) {
+        this.af.database.list('business').update(key, updatedBusiness);
+    }
 }
